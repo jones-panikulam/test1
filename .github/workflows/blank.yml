@@ -1,5 +1,11 @@
 container: docker:19.03
 
+on:
+  push:
+    branches: [ main ]
+ # pull_request:
+ #   branches: [ main ]
+
 services: 
   - docker:19.03-dind
 
@@ -10,7 +16,7 @@ jobs:
     steps:
       - echo "build 1 completed"
 
-    if: contains( github.ref, 'master')
+    if: contains( github.ref, 'main')
 
 
   #- name:Build and Deploy for NPCI Dev in AWS: 
@@ -20,4 +26,4 @@ jobs:
     steps:
       - echo "build 2 completed"
 
-    if: contains( github.ref, 'master')
+    if: contains( github.ref, 'main')
