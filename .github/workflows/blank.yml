@@ -25,7 +25,7 @@ jobs:
     needs: [container-job]
     steps:
       - run: echo "build 2 completed"
-        #     echo build 3 completed
+             echo build 3 completed
 
     if: contains( github.ref, 'main')
     
