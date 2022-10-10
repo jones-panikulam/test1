@@ -16,13 +16,16 @@ jobs:
         # Docker Hub image
         image: docker:19.03-dind
     steps:
-      - run: echo "container job"
-
+    - name: run container
+      run: |
+        echo container job
+        echo 2nd run case
   build:
     runs-on: ubuntu-latest
     needs: [container-job]
     steps:
       - run: echo "build 2 completed"
+        #     echo build 3 completed
 
     if: contains( github.ref, 'main')
     
