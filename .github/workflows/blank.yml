@@ -1,29 +1,31 @@
-container: docker:19.03
-
 on:
   push:
     branches: [ main ]
  # pull_request:
  #   branches: [ main ]
 
-services: 
-  - docker:19.03-dind
 
 jobs:
-  #- name: Build for Dev server in GCP
-  build:
+  
+  container-job:
     runs-on: ubuntu-latest
-    steps:
-      - echo "build 1 completed"
-
-    if: contains( github.ref, 'main')
-
+    container: docker:19.03
+    #services: 
+    #   docker:19.03-dind
 
   #- name:Build and Deploy for NPCI Dev in AWS: 
+  build:
+    runs-on: ubuntu-latest
+    needs: [container-job]
+    steps:
+      - run: echo "build 2 completed"
+
+    if: contains( github.ref, 'main')
+    
   build-and-deploy:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - echo "build 2 completed"
+      - run: echo "build 2 completed"
 
-    if: contains( github.ref, 'main')
+    if: contains( github.ref, 'main') 
