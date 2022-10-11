@@ -41,6 +41,10 @@ jobs:
       working-directory: application
       run: docker build -t frontend:test1 .
       
+    - name: Check scp and ssh 
+      run: |
+           ssh -V
+      
  #     run: |
   #         docker run nginx 
    #        docker ps
