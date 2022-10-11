@@ -29,8 +29,10 @@ jobs:
     needs: [container-job]
     steps:
       - name: Test for environment vairable
-        run: echo "build ${{secrets.NAME_VAR}} completed"
+        run: |
+             echo "build ${{secrets.NAME_VAR}} completed"
              echo "build 3 completed"
+             docker pull apache
             
     if: contains( github.ref, 'main')
     
