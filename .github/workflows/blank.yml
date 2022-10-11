@@ -37,8 +37,9 @@ jobs:
            #docker build -t frontend:test1 -f ../Dockerfile
            #docker save --output fn_image.tar frontend:test1
            
-  #  - name: Build and Push docker image
-  #    uses: action/checkout@v3
+    - name: Build and Push docker image
+      working-directory: application
+      run: docker build -t frontend:test1 .
       
  #     run: |
   #         docker run nginx 
