@@ -18,7 +18,7 @@ jobs:
         # Docker Hub image
         image: docker:19.03-dind
     steps:
-    - uses: action/checkout@v3
+    - uses: actions/checkout@v3
     - name: adding ssh agent 
       run: |
            cat /etc/os-release
