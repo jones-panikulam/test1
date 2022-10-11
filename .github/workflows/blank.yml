@@ -38,7 +38,7 @@ jobs:
         run: |
              echo "build ${{secrets.NAME_VAR}} completed"
              echo "build 3 completed"
-             docker pull apache
+             docker pull nginx
             
     if: contains( github.ref, 'main')
     
