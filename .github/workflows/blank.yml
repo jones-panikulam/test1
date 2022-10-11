@@ -32,10 +32,6 @@ jobs:
            ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
            apk update && apk add --no-cache python3 py-pip
            
-           #docker run -d nginx
-           #docker ps
-           #docker build -t frontend:test1 -f ../Dockerfile
-           #docker save --output fn_image.tar frontend:test1
            
     - name: Build and Push docker image
       working-directory: application
