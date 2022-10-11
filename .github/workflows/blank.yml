@@ -21,7 +21,7 @@ jobs:
     - name: docker 
       run: |
            cat /etc/os-release
-           'which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)'
+           which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)
            
   build: 
   
