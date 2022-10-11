@@ -24,12 +24,12 @@ jobs:
            which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)
            mkdir -p ~/.ssh
            pwd
-           #echo "NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-           #chmod 700 ~/.ssh/id_rsa
-           #eval "$(ssh-agent -s)"
+           echo "NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+           chmod 700 ~/.ssh/id_rsa
+           eval "$(ssh-agent -s)"
            #ssh-add ~/.ssh/id_rsa
-           #ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-           #apk update && apk add --no-cache python3 py-pip
+           ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+           apk update && apk add --no-cache python3 py-pip
 
            
   build: 
