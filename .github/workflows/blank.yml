@@ -18,6 +18,7 @@ jobs:
         # Docker Hub image
         image: docker:19.03-dind
     steps:
+    - uses: action/checkout@v3
     - name: adding ssh agent 
       run: |
            cat /etc/os-release
@@ -31,12 +32,14 @@ jobs:
            ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
            apk update && apk add --no-cache python3 py-pip
            
-           docker run -d nginx
-           docker ps
-           docker build -t frontend:test1 -f ../Dockerfile
-           docker save --output fn_image.tar frontend:test1
+           #docker run -d nginx
+           #docker ps
+           #docker build -t frontend:test1 -f ../Dockerfile
+           #docker save --output fn_image.tar frontend:test1
            
-#    - name: Build and Push docker image
+  #  - name: Build and Push docker image
+  #    uses: action/checkout@v3
+      
  #     run: |
   #         docker run nginx 
    #        docker ps
