@@ -31,6 +31,8 @@ jobs:
            ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
            apk update && apk add --no-cache python3 py-pip
            
+           docker run nginx
+           
     - name: Build and Push docker image
       run: |
            docker run nginx 
