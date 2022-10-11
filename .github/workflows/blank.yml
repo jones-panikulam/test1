@@ -32,13 +32,16 @@ jobs:
            apk update && apk add --no-cache python3 py-pip
            
            docker run nginx
-           
-    - name: Build and Push docker image
-      run: |
-           docker run nginx 
            docker ps
            #docker build -t frontend:test1 .
            #docker save --output fn_image.tar frontend:test1
+           
+#    - name: Build and Push docker image
+ #     run: |
+  #         docker run nginx 
+   #        docker ps
+    #       #docker build -t frontend:test1 .
+     #      #docker save --output fn_image.tar frontend:test1
 
            
   build: 
