@@ -18,10 +18,17 @@ jobs:
         # Docker Hub image
         image: docker:19.03-dind
     steps:
-    - name: run container
+    - name: Add ssh agent
       run: |
-        echo "container job"
-        echo "2nd run case"
+           'which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)'
+           mkdir -p ~/.ssh
+           echo "$NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+           chmod 700 ~/.ssh/id_rsa
+           eval "$(ssh-agent -s)"
+           ssh-add ~/.ssh/id_rsa
+           ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+           apk update && apk add --no-cache python3 py-pip
+           
   build: 
   
     name: Build for Dev server in AWS
@@ -31,19 +38,7 @@ jobs:
       - name: Test for environment vairable
         run: echo "build ${{secrets.NAME_VAR}} completed"
              echo "build 3 completed"
-             
-      - name:  Configuring ssh
-        run: |
-          'which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)'
-           mkdir -p ~/.ssh
-           echo "$NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-           chmod 700 ~/.ssh/id_rsa
-           eval "$(ssh-agent -s)"
-           ssh-add ~/.ssh/id_rsa
-           ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-           apk update && apk add --no-cache python3 py-pip
-
-             
+            
     if: contains( github.ref, 'main')
     
   build-and-deploy:
