@@ -26,12 +26,6 @@ jobs:
   
     name: Build for Dev server in AWS
     runs-on: ubuntu-latest
-    container: docker:19.03
-    services:
-      # Label used to access the service container
-      docker:
-        # Docker Hub image
-        image: docker:19.03-dind
     needs: [container-job]
     steps:
       - name: Test for environment vairable
