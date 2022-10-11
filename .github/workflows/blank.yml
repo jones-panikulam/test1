@@ -34,19 +34,13 @@ jobs:
            
            
     - name: Build and Push docker image
-      working-directory: application
+      #working-directory: application
       run: docker build -t frontend:test1 .
       
     - name: Check scp and ssh 
       run: |
            ssh -V
       
- #     run: |
-  #         docker run nginx 
-   #        docker ps
-    #       #docker build -t frontend:test1 .
-     #      #docker save --output fn_image.tar frontend:test1
-
            
   build: 
   
