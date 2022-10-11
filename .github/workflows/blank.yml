@@ -32,7 +32,7 @@ jobs:
         run: |
              echo "build ${{secrets.NAME_VAR}} completed"
              echo "build 3 completed"
-             docker pull nginx
+             cat /etc/os-release
             
     if: contains( github.ref, 'main')
     
