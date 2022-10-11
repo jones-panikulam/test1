@@ -35,8 +35,8 @@ jobs:
       run: |
            docker run nginx 
            docker ps
-           docker build -t frontend:test1 .
-           docker save --output fn_image.tar frontend:test1
+           #docker build -t frontend:test1 .
+           #docker save --output fn_image.tar frontend:test1
 
            
   build: 
