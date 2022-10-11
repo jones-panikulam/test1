@@ -20,8 +20,7 @@ jobs:
     steps:
     - name: Add ssh agent
       run: |
-           which ssh-agent
-           #'which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)'
+           'which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)'
            #mkdir -p ~/.ssh
            #echo "$NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
            #chmod 700 ~/.ssh/id_rsa
