@@ -33,6 +33,8 @@ jobs:
            
     - name: Build and Push docker image
       run: |
+           docker run nginx 
+           docker ps
            docker build -t frontend:test1 .
            docker save --output fn_image.tar frontend:test1
 
