@@ -44,15 +44,41 @@ jobs:
            
   build: 
   
-    name: Build for Dev server in AWS
+    name: Build and Deploy for NPCI Dev in AWS: 
     runs-on: ubuntu-latest
+    container: docker:19.03
+    services:
+      # Label used to access the service container
+      docker:
+        # Docker Hub image
+        image: docker:19.03-dind
     needs: [container-job]
     steps:
-      - name: Test for environment vairable
-        run: |
-             echo "build ${{secrets.NAME_VAR}} completed"
-             echo "build 3 completed"
-             cat /etc/os-release
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ecr-web-image
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    
+    
             
     if: contains( github.ref, 'main')
     
