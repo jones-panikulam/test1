@@ -95,7 +95,7 @@ jobs:
     #    docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
 # GCP
-    - name: Build and Push to GCP
+    - name: Build and Push GCP
       uses: google-github-actions/auth@v0
       with:
         credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
