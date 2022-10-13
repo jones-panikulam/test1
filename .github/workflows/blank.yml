@@ -17,6 +17,9 @@ jobs:
       docker:
         # Docker Hub image
         image: docker:19.03-dind
+    env:
+     IMAGE_NAME: test-image
+     PROJECT_ID: test-artifact-365211   
     steps:
     - uses: actions/checkout@v3
     #- name: adding ssh agent 
@@ -56,9 +59,7 @@ jobs:
  #   needs: [container-job]
     
     
-  #  env:
-  #    IMAGE_NAME: test-image
-  #    PROJECT_ID: test-artifact-365211
+   
     
     
    # steps:
