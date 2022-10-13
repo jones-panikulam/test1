@@ -9,7 +9,7 @@ jobs:
 
   container-job:
    
-    name: Build for Dev server in GCP
+    name: Build for Dev server in GC
     runs-on: ubuntu-latest
     container: docker:19.03
     services:
