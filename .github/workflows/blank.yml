@@ -19,66 +19,71 @@ jobs:
         image: docker:19.03-dind
     steps:
     - uses: actions/checkout@v3
-    - name: adding ssh agent 
-      run: |
-           cat /etc/os-release
-           which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)
-           mkdir -p ~/.ssh
-           pwd
-           echo "NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-           chmod 700 ~/.ssh/id_rsa
-           eval "$(ssh-agent -s)"
-           #ssh-add ~/.ssh/id_rsa
-           ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-           apk update && apk add --no-cache python3 py-pip
-           sh script.sh
+    #- name: adding ssh agent 
+    #  run: |
+    #       cat /etc/os-release
+    #       which ssh-agent || ( apk update && apk add --no-cache openssh && apk add openssh-client git)
+    #       mkdir -p ~/.ssh
+    #       pwd
+    #       echo "NPCI_DEV_SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    #       chmod 700 ~/.ssh/id_rsa
+    #       eval "$(ssh-agent -s)"
+    #       #ssh-add ~/.ssh/id_rsa
+    #       ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+    #       apk update && apk add --no-cache python3 py-pip
+    #       sh script.sh
            
            
-    - name: Build and Push docker image
-      #working-directory: application
-      run: docker build -t frontend:test1 .
+    #- name: Build and Push docker image
+    #  #working-directory: application
+    #  run: docker build -t frontend:test1 .
       
-    - name: Check scp and ssh 
-      run: |
-           ssh -V
+    #- name: Check scp and ssh 
+    #  run: |
+    #       ssh -V
       
            
-  build: 
+ # build: 
   
-    name: Build and Deploy for NPCI Dev in AWS
-    runs-on: ubuntu-latest
-    container: docker:19.03
-    services:
-      # Label used to access the service container
-      docker:
-        # Docker Hub image
-        image: docker:19.03-dind
-    needs: [container-job]
+ #   name: Build and Deploy for NPCI Dev in AWS
+ #   runs-on: ubuntu-latest
+ #   container: docker:19.03
+ #   services:
+ #     # Label used to access the service container
+ #     docker:
+ #       # Docker Hub image
+ #       image: docker:19.03-dind
+ #   needs: [container-job]
     
     
-    env:
-      IMAGE_NAME: test-image
-      PROJECT_ID: test-artifact-365211
+  #  env:
+  #    IMAGE_NAME: test-image
+  #    PROJECT_ID: test-artifact-365211
     
     
-    steps:
+   # steps:
     
-    - name: Checkout
-      uses: actions/checkout@v2
+   # - name: Checkout
+   #   uses: actions/checkout@v2
 
-# AWS ECR format
+ #AWS ECR format
 
-    #- name: Configure AWS Credentials
-    #  uses: aws-actions/configure-aws-credentials@v1
-    #  with:
-    #    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #    aws-region: us-east-1
-    #
-    #- name: Login to Amazon ECR
-    #  id: login-ecr
-    #  uses: aws-actions/amazon-ecr-login@v1
-    #
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    
+    - name: check aws version
+      run: |
+           aws --version
+    
+    
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    
     #- name: Build, tag, and push image to Amazon ECR
     #  env:
     #    ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -108,13 +113,13 @@ jobs:
    #     docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
          
             
-    if: contains( github.ref, 'main')
+   # if: contains( github.ref, 'main')
     
-  build-and-deploy:
+  #build-and-deploy:
   
-    name: Deploy for Dev server in AWS
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - run: echo "build 2 completed"
-    if: contains( github.ref, 'main') 
+   # name: Deploy for Dev server in AWS
+   # runs-on: ubuntu-latest
+   # needs: [build]
+   # steps:
+   #   - run: echo "build 2 completed"
+   # if: contains( github.ref, 'main') 
