@@ -110,10 +110,10 @@ jobs:
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
       
-    - name: Configure Docker Client
+    - name: docker login  
       run: |-
-        gcloud auth configure-docker --quiet
-        gcloud auth configure-docker us-west2-docker.pkg.dev
+         gcloud auth configure-docker --quiet
+         gcloud auth configure-docker us-west2-docker.pkg.dev
       
     - name: Push Docker Image to Artifact Registry
       run: |-
