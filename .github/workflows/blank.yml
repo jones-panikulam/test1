@@ -12,11 +12,11 @@ jobs:
     name: Build for Dev server in GCP
     runs-on: ubuntu-latest
     #container: docker:19.03
-    services:
+ #   services:
       # Label used to access the service container
-      docker:
+ #     docker:
         # Docker Hub image
-        image: google/cloud-sdk:405.0.0
+ #       image: google/cloud-sdk:405.0.0
     env:
      IMAGE_NAME: test-image
      PROJECT_ID: test-artifact-365211   
@@ -107,8 +107,8 @@ jobs:
    #   run: 'gcloud info'   
     - name: Authenticating Docker for Artifact Registry
       env:
-        SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-      run: cat $SERVICE_ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
+       ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+      run: cat $ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
 
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
