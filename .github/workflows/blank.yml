@@ -128,7 +128,16 @@ jobs:
         docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         docker tag us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
         docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
-         
+    
+    
+  deploy:
+    name: Deploy for Dev server in GCP
+    runs-on: ubuntu-latest
+    env:
+     IMAGE_NAME: test-image
+     PROJECT_ID: test-artifact-365211   
+    steps:
+    - uses: actions/checkout@v3
             
     - name: Deploy to GKE Demo Server       
       run: |          
