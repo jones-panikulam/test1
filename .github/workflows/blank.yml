@@ -100,8 +100,8 @@ jobs:
       with:
         credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
         
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v0'
+   # - name: 'Set up Cloud SDK'
+   #   uses: 'google-github-actions/setup-gcloud@v0'
 
     - name: 'Use gcloud CLI'
       run: 'gcloud info'   
@@ -134,10 +134,8 @@ jobs:
       run: |          
           gcloud components list
           
-    - name: check kubeclt
-      run: kubectl version
-          
-            
+
+                  
             
     if: contains( github.ref, 'main')
     
