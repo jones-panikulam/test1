@@ -134,8 +134,9 @@ jobs:
       run: |          
           gcloud components list
           
-    - name: check kubeclt      
-          kubectl version
+    - name: check kubeclt
+      run: kubectl version
+          
             
             
     if: contains( github.ref, 'main')
