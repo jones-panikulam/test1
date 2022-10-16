@@ -108,7 +108,9 @@ jobs:
     - name: Authenticating Docker for Artifact Registry
       env:
        ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-      run: cat $ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
+      run: |
+          aws --version
+          cat $ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
 
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
