@@ -133,7 +133,9 @@ jobs:
     - name: Deploy to GKE Demo Server       
       run: |          
           gcloud components list
-          kubectl cluster-info
+          
+    - name: check kubeclt      
+          kubectl version
             
             
     if: contains( github.ref, 'main')
