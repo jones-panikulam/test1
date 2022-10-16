@@ -130,6 +130,12 @@ jobs:
         docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
          
             
+    - name: Deploy to GKE Demo Server       
+      run: |          
+          gcloud components list
+          kubectl cluster-info
+            
+            
     if: contains( github.ref, 'main')
     
   #build-and-deploy:
