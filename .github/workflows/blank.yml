@@ -20,7 +20,7 @@ jobs:
     env:
      IMAGE_NAME: test-image
      PROJECT_ID: test-artifact-365211  
-     SERVICE_ACCOUNT_KEY: ${{ steps.secrets.SERVICE_ACCOUNT_KEY }}
+     SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     steps:
      - uses: actions/checkout@v3
     #- name: adding ssh agent 
