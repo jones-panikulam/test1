@@ -133,6 +133,7 @@ jobs:
   deploy:
     name: Deploy for Dev server in GCP
     runs-on: ubuntu-latest
+    needs: [container-job]
     env:
      IMAGE_NAME: test-image
      PROJECT_ID: test-artifact-365211   
@@ -142,11 +143,8 @@ jobs:
     - name: Deploy to GKE Demo Server       
       run: |  
           gcloud components list
-          gcloud components install kubectl
-          gcloud components list
 
-                  
-            
+                        
     if: contains( github.ref, 'main')
     
   #build-and-deploy:
