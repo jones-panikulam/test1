@@ -106,7 +106,9 @@ jobs:
    # - name: 'Use gcloud CLI'
    #   run: 'gcloud info'   
     - name: Authenticating Docker for Artifact Registry
-      run: cat ${{secrets.SERVICE_ACCOUNT_KEY}} | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
+      env:
+        SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+      run: cat $SERVICE_ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
 
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
