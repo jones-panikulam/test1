@@ -113,20 +113,20 @@ jobs:
    #       aws --version
    #       cat $ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
 
-     - name: Build Docker Image
-       run: docker build -t $IMAGE_NAME:latest .
-      
-     - name: docker login  
-       run: |-
-         gcloud auth configure-docker --quiet
-         gcloud auth configure-docker us-west2-docker.pkg.dev
-      
-     - name: Push Docker Image to Artifact Registry
-       run: |-
-        docker tag $IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker tag us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
-        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
+#     - name: Build Docker Image
+#       run: docker build -t $IMAGE_NAME:latest .
+#      
+#     - name: docker login  
+#       run: |-
+#         gcloud auth configure-docker --quiet
+#         gcloud auth configure-docker us-west2-docker.pkg.dev
+#      
+#     - name: Push Docker Image to Artifact Registry
+#       run: |-
+#        docker tag $IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+#        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+#        docker tag us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
+#        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:old
     
     
   deploy:
@@ -150,7 +150,7 @@ jobs:
       id: install
       
     - name: version check
-      run: kubectl version --short
+      run: kubectl cluster-info
       
                         
     if: contains( github.ref, 'main')
