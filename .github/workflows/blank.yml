@@ -20,7 +20,6 @@ jobs:
     env:
      IMAGE_NAME: test-image
      PROJECT_ID: test-artifact-365211  
-     ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     steps:
      - uses: actions/checkout@v3
      - name: adding ssh agent 
@@ -140,7 +139,18 @@ jobs:
      PROJECT_ID: test-artifact-365211   
     steps:
     - uses: actions/checkout@v3
-            
+    
+    - name: Build and Push GCP
+      uses: google-github-actions/auth@v0
+      with:
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+    
     - name: Deploy to GKE Demo Server       
       run: |  
           gcloud components list
