@@ -20,10 +20,12 @@ jobs:
     env:
      IMAGE_NAME: test-image
      PROJECT_ID: test-artifact-365211  
+     ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     steps:
      - uses: actions/checkout@v3
      - name: adding ssh agent 
        run: |
+           cat $ACCOUNT_KEY
            sudo apt update
            which ssh-agent
     #       mkdir -p ~/.ssh
@@ -152,7 +154,7 @@ jobs:
     - name: version check
       run: |
           kubectl version --client
-      
+               
                         
     if: contains( github.ref, 'main')
     
