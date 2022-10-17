@@ -145,10 +145,12 @@ jobs:
 
 
     - name: Kubectl tool installer
-      uses: azure/setup-kubectl@v3
+      uses: marcofranssen/setup-kubectl@v0.3.0
+      id: kubectl
+      with:
+       kubectl-version: latest
+    - run: echo ${{ steps.kubectl.output.kubectl-version }}
       
-    - name: Deploy 
-      run: kubectl version
                         
     if: contains( github.ref, 'main')
     
