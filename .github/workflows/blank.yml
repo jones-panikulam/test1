@@ -25,7 +25,7 @@ jobs:
      - uses: actions/checkout@v3
      - name: adding ssh agent 
        run: |
-           cat $ACCOUNT_KEY
+           cat "$ACCOUNT_KEY"
            sudo apt update
            which ssh-agent
     #       mkdir -p ~/.ssh
