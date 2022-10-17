@@ -150,7 +150,11 @@ jobs:
       id: install
       
     - name: version check
-      run: kubectl cluster-info
+      run: |
+          docker ps
+          sleep 30
+          docker ps
+          kubectl cluster-info
       
                         
     if: contains( github.ref, 'main')
