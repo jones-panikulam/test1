@@ -143,13 +143,14 @@ jobs:
       run: |  
           gcloud components list
 
-
-    - name: Kubectl tool installer
-      uses: marcofranssen/setup-kubectl@v0.3.0
-      id: kubectl
+    - name: kubcetl install
+      uses: azure/setup-kubectl@v3
       with:
-       kubectl-version: latest
-    - run: echo ${{ steps.kubectl.output.kubectl-version }}
+        version: 'v1.1.2' # default is latest stable
+      id: install
+      
+    - name: version check
+      run: kubectl version --short
       
                         
     if: contains( github.ref, 'main')
