@@ -116,8 +116,8 @@ jobs:
   #        aws --version
   #        cat $ACCOUNT_KEY | docker login -u _json_key --password-stdin https://us-west2-docker.pkg.dev
 
-#     - name: Build Docker Image
-#       run: docker build -t $IMAGE_NAME:latest .
+     - name: Build Docker Image
+       run: docker build -t $IMAGE_NAME:latest .
 #      
 #     - name: docker login  
 #       run: |-
